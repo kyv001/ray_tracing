@@ -12,7 +12,7 @@ pygame.init()
 length = 1280
 height = 720
 camera = Camera(0, 0, 0)
-plane = Plane(0, 3, 0, Vector3(0, 1, 0), Vector3(255, 255, 200), 3, 0.7, 0.3)
+plane = Plane(0, 3, 0, Vector3(0, 1, 0), Vector3(255, 255, 200), 3, 0.9, 0.3)
 lightsource1 = LightSource(6, -3, 6, 0.1, (255, 255, 0))
 lightsource2 = LightSource(-2, -4, 5, 0.1, (255, 255, 255))
 lightsource3 = LightSource(-4, -1, 4, 0.1, (0, 255, 255))

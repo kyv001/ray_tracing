@@ -7,3 +7,6 @@ class INF:
 inf = INF()
 
 ENV = 0.7
+
+mcN = 5
+iterN = 5

@@ -14,29 +14,29 @@ class Plane:
         self.transparency = transparency
 
     def get_color(self, p_r, d_r, things, t):
-        if t > 10:
+        if t > iterN:
             return [0, 0, 0], inf
         dn = d_r.dot(self.n)
         if dn != 0:
             t_ = (Vector3(self.x, self.y, self.z) - p_r).dot(self.n) / dn
             if t_ > 0:
                 p_next = p_r + d_r * t_
-                reflected_n = Vector3(self.n[0] + gauss(0, 50) / 10000 * self.roughness, self.n[1] + gauss(0, 50) / 10000 * self.roughness, self.n[2] + gauss(0, 50) / 10000 * self.roughness)
-                reflected_n = reflected_n.normalize()
-                reflected_d = d_r - 2 * (d_r.dot(reflected_n)) * reflected_n
-                color_reflected = self.c * 0
-                d_last = inf
-                for thing in things:
-                    if thing != self:
-                        c, distance = thing.get_color(p_next, reflected_d.normalize(), things, t + 1)
-                        if distance < d_last:
-                            color_reflected = c
-                            d_last = distance
-                            color_reflected = list(color_reflected)
+                color_reflected = [0, 0, 0]
+                for _ in range(mcN):
+                    reflected_n = Vector3(self.n[0] + gauss(0, 50) / 10000 * self.roughness, self.n[1] + gauss(0, 50) / 10000 * self.roughness, self.n[2] + gauss(0, 50) / 10000 * self.roughness)
+                    reflected_n = reflected_n.normalize()
+                    reflected_d = d_r - 2 * (d_r.dot(reflected_n)) * reflected_n
+                    d_last = inf
+                    for thing in things:
+                        if thing != self:
+                            c, distance = thing.get_color(p_next, reflected_d.normalize(), things, t + 1)
+                            if distance < d_last:
+                                d_last = distance
+                                lc = list(c)
+                                for i in range(3):
+                                    color_reflected[i] += lc[i] / mcN
                             
                 p_next = p_r + d_r * t_
-                through_n = self.n
-                through_n = through_n.normalize()
                 through_d = d_r
                 color_through = self.c * 0
                 d_last = inf

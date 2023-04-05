@@ -10,9 +10,6 @@ class LightSource:
         self.c = c
 
     def get_color(self, p_r, d_r, things, t):
-        if t > 10:
-            return [0, 0, 0], inf
-        
         a = Vector3(self.x, self.y, self.z) - p_r
         
         l = d_r.dot(a)
