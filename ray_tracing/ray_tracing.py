@@ -9,8 +9,8 @@ from lightsource import LightSource
 from ball import Ball
 
 pygame.init()
-length = 1280
-height = 720
+length = 1920
+height = 1080
 camera = Camera(0, 0, 0)
 plane = Plane(0, 3, 0, Vector3(0, 1, 0), Vector3(255, 255, 200), 3, 0.9, 0.3)
 lightsource1 = LightSource(6, -3, 6, 0.1, (255, 255, 0))
@@ -24,15 +24,8 @@ ball5 = Ball(6, 12, 20, 5, (255, 125, 0), 0, 0.8)
 screen = Screen((0, 0, 2), length, height, 0.012)
 things = [lightsource1, lightsource2, lightsource3, plane, ball1, ball2, ball3, ball4, ball5]
 #things = [lightsource1, plane]
-rendered_screen = camera.render(screen, things)
 window = pygame.display.set_mode((length, height))
-
-for y in range(height):
-    for x in range(length):
-        try:
-            window.set_at((x, y), rendered_screen[y][x])
-        except:
-            print(rendered_screen[y][x])
+rendered_screen = camera.render(screen, things, window)
 pygame.image.save(window, "result.png")
 
 running = True
